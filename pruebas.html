@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio setTimeout - JavaScript</title>
+    <style>
+        /* ========================================
+           ESTILOS PARA EL EJERCICIO SETTIMEOUT
+           ======================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF8A50 0%, #FFB347 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #FF8A50;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #FF8A50, #FFB347);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .timer-display {
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .log-container {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .task-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .task-item.pending {
+            border-color: #ffc107;
+            background: #fff3cd;
+        }
+        
+        .task-item.completed {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .task-item.cancelled {
+            border-color: #dc3545;
+            background: #f8d7da;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        input[type="number"] {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #FF8A50;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-box h4 {
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-display {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         ESTRUCTURA HTML DEL EJERCICIO SETTIMEOUT
+         ======================================== -->
+    
+    <div class="container">
+        <!-- Encabezado principal -->
+        <div class="header">
+            <h1>⏰ Ejercicio setTimeout</h1>
+            <p>Aprende a manejar temporizadores en JavaScript</p>
+        </div>
+        
+        <div class="content">
+            <!-- Información del ejercicio -->
+            <div class="info-box">
+                <h4>📚 Sobre setTimeout():</h4>
+                <p>
+                    <strong>setTimeout()</strong> es una función que ejecuta código después de un tiempo específico.
+                    Es fundamental para crear animaciones, retrasos y operaciones asíncronas en JavaScript.
+                </p>
+            </div>
+            
+            <!-- Cronómetro principal -->
+            <div class="section">
+                <h3>🕐 Cronómetro con setTimeout</h3>
+                <div class="timer-display" id="timerDisplay">00:00</div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="iniciarCronometro()">▶️ Iniciar</button>
+                    <button class="btn btn-danger" onclick="detenerCronometro()">⏹️ Detener</button>
+                    <button class="btn btn-secondary" onclick="reiniciarCronometro()">🔄 Reiniciar</button>
+                </div>
+            </div>
+            
+            <!-- Temporizador personalizado -->
+            <div class="section">
+                <h3>⏲️ Temporizador Personalizado</h3>
+                <div>
+                    <input type="number" id="tiempoInput" value="5" min="1" max="60" placeholder="Segundos">
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="crearTemporizador()">🚀 Crear Temporizador</button>
+                        <button class="btn btn-danger" onclick="cancelarTodos()">❌ Cancelar Todos</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lista de tareas programadas -->
+            <div class="section">
+                <h3>📋 Tareas Programadas</h3>
+                <div id="taskContainer">
+                    <p>No hay tareas programadas</p>
+                </div>
+            </div>
+            
+            <!-- Log de eventos -->
+            <div class="section">
+                <h3>📝 Log de Eventos</h3>
+                <div class="log-container" id="logContainer">
+Esperando eventos de setTimeout...
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========================================
+         JAVASCRIPT - EJERCICIO SETTIMEOUT
+         ======================================== -->
+    
+    <script>
+        // ========================================
+        // VARIABLES GLOBALES
+        // ========================================
+        
+        let cronometroInterval = null;
+        let tiempoInicio = 0;
+        let tiempoTranscurrido = 0;
+        let estaEjecutando = false;
+        let timeoutIds = []; // Array para almacenar IDs de setTimeout
+        let contadorTareas = 0;
+        
+        // Referencias a elementos DOM
+        let timerDisplay;
+        let logContainer;
+        let taskContainer;
+        
+        // ========================================
+        // INICIALIZACIÓN
+        // ========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            timerDisplay = document.getElementById('timerDisplay');
+            logContainer = document.getElementById('logContainer');
+            taskContainer = document.getElementById('taskContainer');
+            
+            logToConsole('🎯 Ejercicio setTimeout inicializado');
+            logToConsole('📖 Usa los controles para experimentar con temporizadores');
+            
+            // Ejemplo automático después de 2 segundos
+            setTimeout(() => {
+                logToConsole('💡 Ejemplo: Este mensaje apareció después de 2 segundos usando setTimeout');
+            }, 2000);
+        });
+        
+        // ========================================
+        // FUNCIONES DE UTILIDAD
+        // ========================================
+        
+        function logToConsole(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logMessage = `[${timestamp}] ${message}`;
+            
+            // Agregar al log visual
+            logContainer.textContent += logMessage + '\n';
+            logContainer.scrollTop = logContainer.scrollHeight;
+            
+            // También mostrar en consola del navegador
+            console.log(logMessage);
+        }
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // ========================================
+        // FUNCIONES DEL CRONÓMETRO
+        // ========================================
+        
+        function iniciarCronometro() {
+            if (estaEjecutando) {
+                logToConsole('⚠️ El cronómetro ya está ejecutándose');
+                return;
+            }
+            
+            logToConsole('▶️ Cronómetro iniciado');
+            estaEjecutando = true;
+            tiempoInicio = Date.now() - tiempoTranscurrido * 1000;
+            
+            // Usar setTimeout recursivo para actualizar cada segundo
+            function actualizarCronometro() {
+                if (estaEjecutando) {
+                    tiempoTranscurrido = Math.floor((Date.now() - tiempoInicio) / 1000);
+                    timerDisplay.textContent = formatTime(tiempoTranscurrido);
+                    
+                    // Programar la siguiente actualización con setTimeout
+                    setTimeout(actualizarCronometro, 1000);
+                }
+            }
+            
+            actualizarCronometro();
+        }
+        
+        function detenerCronometro() {
+            if (!estaEjecutando) {
+                logToConsole('⚠️ El cronómetro no está ejecutándose');
+                return;
+            }
+            
+            logToConsole(`⏹️ Cronómetro detenido en: ${formatTime(tiempoTranscurrido)}`);
+            estaEjecutando = false;
+        }
+        
+        function reiniciarCronometro() {
+            logToConsole('🔄 Cronómetro reiniciado');
+            estaEjecutando = false;
+            tiempoTranscurrido = 0;
+            timerDisplay.textContent = '00:00';
+        }
+        
+        // ========================================
+        // FUNCIONES DE TEMPORIZADORES PERSONALIZADOS
+        // ========================================
+        
+        function crearTemporizador() {
+            const tiempo = parseInt(document.getElementById('tiempoInput').value);
+            
+            if (!tiempo || tiempo < 1 || tiempo > 60) {
+                logToConsole('❌ Error: Tiempo debe estar entre 1 y 60 segundos');
+                return;
+            }
+            
+            const tareaId = ++contadorTareas;
+            logToConsole(`⏲️ Temporizador #${tareaId} creado: ${tiempo} segundos`);
+            
+            // Crear elemento visual para la tarea
+            const taskElement = crearElementoTarea(tareaId, tiempo);
+            
+            // Crear el setTimeout
+            const timeoutId = setTimeout(() => {
+                logToConsole(`🎉 ¡Temporizador #${tareaId} completado!`);
+                taskElement.classList.remove('pending');
+                taskElement.classList.add('completed');
+                taskElement.innerHTML += ' <strong>✅ COMPLETADO</strong>';
+                
+                // Remover el ID del array de timeouts activos
+                const index = timeoutIds.indexOf(timeoutId);
+                if (index > -1) {
+                    timeoutIds.splice(index, 1);
+                }
+                
+                // Mostrar notificación
+                mostrarNotificacion(`Temporizador #${tareaId} completado`);
+                
+            }, tiempo * 1000);
+            
+            // Almacenar el ID para poder cancelarlo después
+            timeoutIds.push(timeoutId);
+            
+            // Asociar el timeoutId al elemento para poder cancelarlo individualmente
+            taskElement.dataset.timeoutId = timeoutId;
+        }
+        
+        function crearElementoTarea(tareaId, tiempo) {
+            // Crear elemento de tarea
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task-item pending';
+            taskDiv.innerHTML = `
+                <strong>Tarea #${tareaId}</strong> - ${tiempo} segundos
+                <button onclick="cancelarTarea(${tareaId}, this)" style="float: right; padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    ❌ Cancelar
+                </button>
+            `;
+            
+            // Agregar al contenedor
+            if (taskContainer.children.length === 1 && taskContainer.children[0].tagName === 'P') {
+                taskContainer.innerHTML = ''; // Limpiar mensaje de "no hay tareas"
+            }
+            taskContainer.appendChild(taskDiv);
+            
+            return taskDiv;
+        }
+        
+        function cancelarTarea(tareaId, buttonElement) {
+            const taskElement = buttonElement.parentElement;
+            const timeoutId = parseInt(taskElement.dataset.timeoutId);
+            
+            // Cancelar el setTimeout
+            clearTimeout(timeoutId);
+            
+            // Actualizar visualmente
+            taskElement.classList.remove('pending');
+            taskElement.classList.add('cancelled');
+            buttonElement.remove();
+            taskElement.innerHTML += ' <strong>❌ CANCELADO</strong>';
+            
+            // Remover del array de timeouts
+            const index = timeoutIds.indexOf(timeoutId);
+            if (index > -1) {
+                timeoutIds.splice(index, 1);
+            }
+            
+            logToConsole(`❌ Temporizador #${tareaId} cancelado`);
+        }
+        
+        function cancelarTodos() {
+            // Cancelar todos los setTimeout activos
+            timeoutIds.forEach(id => clearTimeout(id));
+            timeoutIds = [];
+            
+            // Actualizar visualmente todas las tareas pendientes
+            const tareasPendientes = taskContainer.querySelectorAll('.task-item.pending');
+            tareasPendientes.forEach(tarea => {
+                tarea.classList.remove('pending');
+                tarea.classList.add('cancelled');
+                const boton = tarea.querySelector('button');
+                if (boton) boton.remove();
+                tarea.innerHTML += ' <strong>❌ CANCELADO</strong>';
+            });
+            
+            logToConsole(`❌ Todos los temporizadores cancelados (${tareasPendientes.length} tareas)`);
+        }
+        
+        function mostrarNotificacion(mensaje) {
+            // Crear notificación temporal
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #28a745, #20c997);
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = mensaje;
+            
+            // Agregar estilos de animación
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(notification);
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // ========================================
+        // EJEMPLOS AUTOMÁTICOS
+        // ========================================
+        
+        // Demostración de múltiples setTimeout con diferentes tiempos
+        setTimeout(() => {
+            logToConsole('🚀 Demos automáticos iniciados');
+            
+            // Serie de ejemplos con diferentes delays
+            setTimeout(() => logToConsole('📝 Ejemplo 1: setTimeout de 1 segundo'), 1000);
+            setTimeout(() => logToConsole('📝 Ejemplo 2: setTimeout de 3 segundos'), 3000);
+            setTimeout(() => logToConsole('📝 Ejemplo 3: setTimeout de 5 segundos'), 5000);
+            
+        }, 5000); // Iniciar después de 5 segundos
+    </script>
+
+</body>
+</html>
