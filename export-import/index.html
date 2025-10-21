@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras UNIOR - Sistema Modular</title>
+    
+    <!-- ========================================
+         ENLACE AL ARCHIVO CSS EXTERNO
+         ======================================== -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- ========================================
+         ESTRUCTURA HTML DEL CARRITO
+         ======================================== -->
+    
+    <!-- Encabezado principal -->
+    <div class="header">
+        <h1>🛒 Carrito de Compras UNIOR</h1>
+        <p>Sistema Modular con JavaScript ES6</p>
+        <small>✨ Usando import/export • Diseño responsive • CSS moderno</small>
+    </div>
+    
+    <!-- Sección principal del carrito -->
+    <div class="carrito-section">
+        <div id="carrito-container">
+            <!-- Aquí se cargarán dinámicamente los productos -->
+            <h3>Cargando productos...</h3>
+        </div>
+    </div>
+    
+    <!-- Sección de resumen financiero -->
+    <div class="resumen-section">
+        <h3>💰 Resumen de Compra</h3>
+        
+        <div class="resumen-item subtotal">
+            <span>Subtotal:</span>
+            <span id="subtotal">$0.00</span>
+        </div>
+        
+        <div class="resumen-item impuesto">
+            <span>Impuesto (21% Laptop):</span>
+            <span id="impuesto">$0.00</span>
+        </div>
+    </div>
+    
+    <!-- Sección de controles para agregar productos -->
+    <div class="controles-section">
+        <h3>➕ Agregar Productos</h3>
+        <p>Haz clic en los botones para agregar más productos al carrito:</p>
+        
+        <button class="btn-agregar" onclick="agregarTeclado()">
+            Agregar Teclado Mecánico ($75)
+        </button>
+        
+        <button class="btn-agregar" onclick="agregarMonitor()">
+            Agregar Monitor 4K ($300)
+        </button>
+        
+        <button class="btn-agregar" onclick="agregarAudiculares()">
+            Agregar Audífonos Bluetooth ($120)
+        </button>
+    </div>
+    
+    <!-- Sección informativa sobre el proyecto -->
+    <div class="controles-section">
+        <h3>📚 Sobre este Proyecto</h3>
+        <p><strong>🎯 Sistema de Carrito con JavaScript ES6 Modular</strong></p>
+        <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+            <p>✅ <strong>Características técnicas:</strong></p>
+            <ul>
+                <li><strong>Módulos ES6:</strong> import/export para código organizado</li>
+                <li><strong>Clases modernas:</strong> Programación orientada a objetos</li>
+                <li><strong>DOM dinámico:</strong> Manipulación en tiempo real</li>
+                <li><strong>CSS avanzado:</strong> Gradientes, animaciones, responsive</li>
+                <li><strong>Paleta cálida:</strong> Diseño visual atractivo</li>
+            </ul>
+            <p>🚀 <strong>Tecnologías utilizadas:</strong></p>
+            <ul>
+                <li>JavaScript ES6+ (módulos, clases, arrow functions)</li>
+                <li>HTML5 semántico</li>
+                <li>CSS3 moderno (Grid, Flexbox, animaciones)</li>
+                <li>Diseño responsive mobile-first</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- ========================================
+         SCRIPTS JAVASCRIPT CON MÓDULOS ES6
+         ======================================== -->
+    
+    <!-- 
+    IMPORTANTE: type="module" habilita import/export
+    - Permite usar import { Producto } from './producto.js'
+    - Cada módulo tiene su propio scope (no contamina window)
+    - Requiere servidor HTTP para funcionar correctamente
+    -->
+    <script type="module" src="carrito.js"></script>
+    
+    <!-- Script adicional para funciones globales (también como módulo) -->
+    <script type="module">
+        // ========================================
+        // IMPORTACIÓN Y FUNCIONES GLOBALES
+        // ======================================== 
+        
+        // Importamos lo necesario desde carrito.js
+        // Nota: En un módulo real, estas funciones deberían exportarse desde carrito.js
+        
+        // Por ahora, definimos las funciones aquí para compatibilidad con onclick
+        window.agregarTeclado = function() {
+            // Accedemos a las variables globales del módulo carrito.js
+            // Esto es una solución temporal; lo ideal sería exportar estas funciones
+            const nuevoId = window.miCarrito ? window.miCarrito.length + 1 : 3;
+            if (window.agregarProductoAlCarrito) {
+                window.agregarProductoAlCarrito(nuevoId, "Teclado Mecánico", 75, 25);
+            }
+        };
+        
+        window.agregarMonitor = function() {
+            const nuevoId = window.miCarrito ? window.miCarrito.length + 1 : 4;
+            if (window.agregarProductoAlCarrito) {
+                window.agregarProductoAlCarrito(nuevoId, "Monitor 4K", 300, 15);
+            }
+        };
+        
+        window.agregarAudiculares = function() {
+            const nuevoId = window.miCarrito ? window.miCarrito.length + 1 : 5;
+            if (window.agregarProductoAlCarrito) {
+                window.agregarProductoAlCarrito(nuevoId, "Audífonos Bluetooth", 120, 30);
+            }
+        };
+        
+        // Mensaje informativo en la consola
+        console.log("=".repeat(60));
+        console.log("🚀 CARRITO CON MÓDULOS ES6 - Sistema UNIOR");
+        console.log("=".repeat(60));
+        console.log("📦 Usando import/export de JavaScript ES6");
+        console.log("🔧 Cada archivo es un módulo independiente");
+        console.log("⚡ Mejor organización y reutilización de código");
+        console.log("=".repeat(60));
+    </script>
+</body>
+</html>

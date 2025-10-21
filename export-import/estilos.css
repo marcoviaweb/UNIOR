@@ -1,0 +1,297 @@
+/* ========================================
+   ESTILOS CSS PARA EL CARRITO DE COMPRAS
+   Sistema UNIOR - Paleta de Colores Cálidos
+   ======================================== */
+
+/* Estilos generales del body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #FFF5F5 0%, #FFE8D6 25%, #FFF2E8 50%, #FFEAD5 75%, #FFF8F5 100%);
+    min-height: 100vh;
+    color: #5D4037;
+}
+
+/* Estilo del encabezado principal */
+.header {
+    background: linear-gradient(135deg, #FF8A50 0%, #FFB347 50%, #FF7043 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(255, 138, 80, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Contenedor principal del carrito */
+.carrito-section {
+    background: linear-gradient(145deg, #FFFFFF 0%, #FFF8F5 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(255, 138, 80, 0.15);
+    border: 1px solid rgba(255, 179, 71, 0.3);
+}
+
+/* Estilo para cada producto individual */
+.producto-item {
+    border: 2px solid #FFD54F;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+    background: linear-gradient(45deg, #FFF8E1 0%, #FFFFFF 50%, #FFF3E0 100%);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.producto-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 179, 71, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+/* Efecto hover para los productos */
+.producto-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 138, 80, 0.25);
+    border-color: #FF8A50;
+}
+
+.producto-item:hover::before {
+    left: 100%;
+}
+
+/* Información del producto */
+.producto-info h4 {
+    color: #E65100;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(255, 138, 80, 0.2);
+}
+
+.producto-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #6D4C41;
+}
+
+/* Sección de resumen financiero */
+.resumen-section {
+    background: linear-gradient(145deg, #FFFFFF 0%, #FFF8F5 100%);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(255, 138, 80, 0.15);
+    border: 1px solid rgba(255, 179, 71, 0.3);
+}
+
+/* Elementos del resumen */
+.resumen-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #FFF3E0 0%, #FFECB3 100%);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    transition: all 0.3s ease;
+}
+
+.resumen-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(255, 138, 80, 0.2);
+}
+
+/* Estilo especial para el subtotal */
+.subtotal {
+    background: linear-gradient(45deg, #FF8A50 0%, #FFB347 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 4px 15px rgba(255, 138, 80, 0.4);
+    border: none !important;
+}
+
+/* Estilo para el impuesto */
+.impuesto {
+    background: linear-gradient(45deg, #FFAB91 0%, #FF7043 100%);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 112, 67, 0.4);
+    border: none !important;
+}
+
+/* Botón para agregar productos */
+.btn-agregar {
+    background: linear-gradient(45deg, #FF8A50 0%, #FFB347 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 10px 5px;
+    box-shadow: 0 4px 15px rgba(255, 138, 80, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-agregar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-agregar:hover {
+    background: linear-gradient(45deg, #E65100 0%, #FF8F00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 138, 80, 0.5);
+}
+
+.btn-agregar:hover::before {
+    left: 100%;
+}
+
+.btn-agregar:active {
+    transform: translateY(0px);
+}
+
+/* Sección de controles */
+.controles-section {
+    background: linear-gradient(145deg, #FFFFFF 0%, #FFF8F5 100%);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(255, 138, 80, 0.15);
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 179, 71, 0.3);
+}
+
+.controles-section h3 {
+    color: #E65100;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(255, 138, 80, 0.2);
+}
+
+/* Responsive design para pantallas pequeñas */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .resumen-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .btn-agregar {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .header {
+        padding: 15px;
+    }
+    
+    .carrito-section,
+    .resumen-section,
+    .controles-section {
+        padding: 15px;
+    }
+    
+    .producto-item {
+        padding: 12px;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.carrito-section,
+.resumen-section,
+.controles-section {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Efectos de enfoque para accesibilidad */
+.btn-agregar:focus {
+    outline: 3px solid rgba(255, 138, 80, 0.5);
+    outline-offset: 2px;
+}
+
+/* Estilos para elementos que se cargan dinámicamente */
+.producto-item {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Mejoras de tipografía */
+h1, h2, h3 {
+    color: #E65100;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+/* Estilos para mejor legibilidad */
+p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Efectos de transición suaves para toda la página */
+* {
+    box-sizing: border-box;
+}
+
+/* Mejoras en la barra de desplazamiento para navegadores webkit */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFF8F5;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #FF8A50, #FFB347);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #E65100, #FF8F00);
+}
