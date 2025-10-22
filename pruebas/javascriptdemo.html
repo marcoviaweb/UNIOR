@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradigmas de Programación en JavaScript</title>
+    <style>
+        /* ========================================
+           ESTILOS PARA LOS PARADIGMAS DE JAVASCRIPT
+           ======================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF8A50 0%, #FFB347 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .paradigm-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #FF8A50;
+        }
+        
+        .paradigm-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .paradigm-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+        
+        .paradigm-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .paradigm-description {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin: 15px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            tab-size: 4;
+            -moz-tab-size: 4;
+            -o-tab-size: 4;
+        }
+        
+        .demo-area {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #FF8A50, #FFB347);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-display {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            min-height: 100px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+        
+        /* Mejoras para la legibilidad del código */
+        .code-example::before {
+            content: "💻 Código JavaScript:";
+            display: block;
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Colores para sintaxis */
+        .code-example .comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        
+        .code-example .keyword {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .code-example .string {
+            color: #f39c12;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #FF8A50;
+        }
+        
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-highlight {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+        }
+        
+        .feature-highlight h4 {
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .grid-demo {
+                grid-template-columns: 1fr;
+            }
+            
+            .paradigm-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         ESTRUCTURA HTML PARA PARADIGMAS DE JS
+         ======================================== -->
+    
+    <div class="container">
+        <!-- Encabezado principal -->
+        <div class="header">
+            <h1>🧩 Paradigmas de Programación en JavaScript</h1>
+            <p>Explora diferentes formas de escribir y organizar código</p>
+        </div>
+        
+        <div class="content">
+            <!-- Introducción -->
+            <div class="feature-highlight">
+                <h4>💡 ¿Qué son los Paradigmas de Programación?</h4>
+                <p>
+                    Los paradigmas son diferentes formas de pensar y estructurar código. JavaScript es un lenguaje 
+                    <strong>multi-paradigma</strong>, lo que significa que puedes usar diferentes enfoques según 
+                    las necesidades de tu proyecto.
+                </p>
+            </div>
+            
+            <!-- ========================================
+                 PARADIGMA 1: PROGRAMACIÓN ORIENTADA A OBJETOS
+                 ======================================== -->
+            <div class="paradigm-section">
+                <div class="paradigm-header">
+                    <div class="paradigm-icon">🏗️</div>
+                    <h2 class="paradigm-title">Programación Orientada a Objetos (POO)</h2>
+                </div>
+                
+                <div class="paradigm-description">
+                    <h4>🎯 Concepto:</h4>
+                    <p>Organiza el código en <strong>objetos</strong> que contienen datos (propiedades) y comportamientos (métodos). 
+                    Se basa en conceptos como clases, herencia, encapsulación y polimorfismo.</p>
+                </div>
+                
+                <div class="feature-highlight">
+                    <h4>🔑 Características Clave:</h4>
+                    <ul>
+                        <li><strong>Clases:</strong> Plantillas para crear objetos</li>
+                        <li><strong>Objetos:</strong> Instancias de clases con propiedades y métodos</li>
+                        <li><strong>Herencia:</strong> Las clases pueden heredar de otras clases</li>
+                        <li><strong>Encapsulación:</strong> Datos y métodos agrupados en objetos</li>
+                    </ul>
+                </div>
+                
+                <div class="code-example">// EJEMPLO: Sistema de Vehículos con POO
+
+// Clase base (padre)
+class Vehiculo {
+    constructor(marca, modelo, año) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.año = año;
+        this.velocidad = 0;
+    }
+    
+    // Método para acelerar
+    acelerar(incremento) {
+        this.velocidad += incremento;
+        return `${this.marca} ${this.modelo} acelera a ${this.velocidad} km/h`;
+    }
+    
+    // Método para obtener información
+    obtenerInfo() {
+        return `${this.marca} ${this.modelo} (${this.año})`;
+    }
+}
+
+// Clase derivada (hijo) - Herencia
+class Auto extends Vehiculo {
+    constructor(marca, modelo, año, puertas) {
+        super(marca, modelo, año); // Llamar al constructor padre
+        this.puertas = puertas;
+        this.tipo = "Automóvil";
+    }
+    
+    // Método específico de Auto
+    tocarBocina() {
+        return `🚗 ${this.marca} toca la bocina: ¡BEEP BEEP!`;
+    }
+    
+    // Sobrescribir método padre (Polimorfismo)
+    obtenerInfo() {
+        return `${super.obtenerInfo()} - ${this.tipo} de ${this.puertas} puertas`;
+    }
+}
+
+class Motocicleta extends Vehiculo {
+    constructor(marca, modelo, año, cilindrada) {
+        super(marca, modelo, año);
+        this.cilindrada = cilindrada;
+        this.tipo = "Motocicleta";
+    }
+    
+    hacerCaballito() {
+        return `🏍️ ${this.marca} hace un caballito espectacular!`;
+    }
+    
+    obtenerInfo() {
+        return `${super.obtenerInfo()} - ${this.tipo} ${this.cilindrada}cc`;
+    }
+}</div>
+                
+                <div class="demo-area">
+                    <h4>🎮 Demo Interactiva - POO:</h4>
+                    <div class="grid-demo">
+                        <div>
+                            <div class="input-group">
+                                <label>Marca del Auto:</label>
+                                <input type="text" id="autoMarca" value="Toyota" placeholder="Ej: Toyota">
+                            </div>
+                            <div class="input-group">
+                                <label>Modelo:</label>
+                                <input type="text" id="autoModelo" value="Corolla" placeholder="Ej: Corolla">
+                            </div>
+                            <div class="controls">
+                                <button class="btn btn-primary" onclick="crearAuto()">🚗 Crear Auto</button>
+                                <button class="btn btn-secondary" onclick="acelerar()">⚡ Acelerar</button>
+                                <button class="btn btn-success" onclick="tocarBocina()">🔊 Bocina</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <label>Marca de Moto:</label>
+                                <input type="text" id="motoMarca" value="Yamaha" placeholder="Ej: Yamaha">
+                            </div>
+                            <div class="input-group">
+                                <label>Cilindrada:</label>
+                                <input type="number" id="motoCilindrada" value="600" placeholder="Ej: 600">
+                            </div>
+                            <div class="controls">
+                                <button class="btn btn-primary" onclick="crearMoto()">🏍️ Crear Moto</button>
+                                <button class="btn btn-success" onclick="hacerCaballito()">🤸 Caballito</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-display" id="oopResult">
+Resultados de Programación Orientada a Objetos aparecerán aquí...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================
+                 PARADIGMA 2: PROGRAMACIÓN FUNCIONAL
+                 ======================================== -->
+            <div class="paradigm-section">
+                <div class="paradigm-header">
+                    <div class="paradigm-icon">🔧</div>
+                    <h2 class="paradigm-title">Programación Funcional</h2>
+                </div>
+                
+                <div class="paradigm-description">
+                    <h4>🎯 Concepto:</h4>
+                    <p>Se basa en el uso de <strong>funciones</strong> como elementos principales. Las funciones son tratadas 
+                    como "ciudadanos de primera clase" y se evita el cambio de estado y los datos mutables.</p>
+                </div>
+                
+                <div class="feature-highlight">
+                    <h4>🔑 Características Clave:</h4>
+                    <ul>
+                        <li><strong>Funciones Puras:</strong> Sin efectos secundarios, mismo input = mismo output</li>
+                        <li><strong>Inmutabilidad:</strong> No se modifican los datos originales</li>
+                        <li><strong>Higher-Order Functions:</strong> Funciones que reciben/retornan otras funciones</li>
+                        <li><strong>Composición:</strong> Combinar funciones pequeñas para crear funciones complejas</li>
+                    </ul>
+                </div>
+                
+                <div class="code-example">// EJEMPLO: Procesamiento de Datos con Programación Funcional
+
+// Datos de ejemplo
+const estudiantes = [
+    { nombre: "Ana", edad: 20, notas: [85, 90, 78] },
+    { nombre: "Carlos", edad: 22, notas: [92, 88, 95] },
+    { nombre: "María", edad: 19, notas: [76, 82, 89] },
+    { nombre: "Luis", edad: 21, notas: [88, 85, 91] }
+];
+
+// FUNCIONES PURAS (no modifican datos originales)
+
+// Función para calcular promedio
+const calcularPromedio = (notas) => {
+    return notas.reduce((sum, nota) => sum + nota, 0) / notas.length;
+};
+
+// Función para agregar promedio a estudiante (inmutable)
+const agregarPromedio = (estudiante) => ({
+    ...estudiante, // Spread operator para no mutar original
+    promedio: calcularPromedio(estudiante.notas)
+});
+
+// Función para determinar estado académico
+const determinarEstado = (promedio) => {
+    if (promedio >= 90) return "Excelente";
+    if (promedio >= 80) return "Bueno";
+    if (promedio >= 70) return "Regular";
+    return "Necesita mejorar";
+};
+
+// HIGHER-ORDER FUNCTIONS y COMPOSICIÓN
+
+// Función que filtra por condición
+const filtrarPor = (condicion) => (array) => array.filter(condicion);
+
+// Función que mapea con transformación
+const mapearCon = (transformacion) => (array) => array.map(transformacion);
+
+// Composición de funciones
+const procesarEstudiantes = (estudiantes) => {
+    return estudiantes
+        .map(agregarPromedio)                    // Agregar promedio
+        .map(est => ({                          // Agregar estado
+            ...est,
+            estado: determinarEstado(est.promedio)
+        }))
+        .filter(est => est.promedio >= 80)      // Solo los buenos estudiantes
+        .sort((a, b) => b.promedio - a.promedio); // Ordenar por promedio
+};
+
+// FUNCIONES DE UTILIDAD (CURRYING)
+const filtrarPorEdad = (edadMinima) => (estudiante) => estudiante.edad >= edadMinima;
+const filtrarPorPromedio = (promedioMinimo) => (estudiante) => estudiante.promedio >= promedioMinimo;</div>
+                
+                <div class="demo-area">
+                    <h4>🎮 Demo Interactiva - Programación Funcional:</h4>
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="mostrarEstudiantesOriginales()">📚 Datos Originales</button>
+                        <button class="btn btn-secondary" onclick="procesarDatos()">⚙️ Procesar Datos</button>
+                        <button class="btn btn-success" onclick="filtrarTop()">🏆 Solo Excelentes</button>
+                        <button class="btn btn-primary" onclick="estadisticas()">📊 Estadísticas</button>
+                    </div>
+                    <div class="result-display" id="functionalResult">
+Resultados de Programación Funcional aparecerán aquí...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================
+                 PARADIGMA 3: PROGRAMACIÓN IMPERATIVA
+                 ======================================== -->
+            <div class="paradigm-section">
+                <div class="paradigm-header">
+                    <div class="paradigm-icon">📋</div>
+                    <h2 class="paradigm-title">Programación Imperativa</h2>
+                </div>
+                
+                <div class="paradigm-description">
+                    <h4>🎯 Concepto:</h4>
+                    <p>Se enfoca en <strong>cómo</strong> hacer las cosas, describiendo paso a paso las instrucciones 
+                    que debe seguir el programa. Usa variables, bucles, condicionales y secuencias de comandos.</p>
+                </div>
+                
+                <div class="feature-highlight">
+                    <h4>🔑 Características Clave:</h4>
+                    <ul>
+                        <li><strong>Variables Mutables:</strong> Los valores pueden cambiar durante la ejecución</li>
+                        <li><strong>Control de Flujo:</strong> if/else, for, while, switch</li>
+                        <li><strong>Secuencial:</strong> Las instrucciones se ejecutan en orden específico</li>
+                        <li><strong>Estado:</strong> El programa mantiene y modifica su estado</li>
+                    </ul>
+                </div>
+                
+                <div class="code-example">// EJEMPLO: Algoritmos de Ordenamiento y Búsqueda (Imperativo)
+
+// Algoritmo de Burbuja (Bubble Sort) - Imperativo clásico
+function ordenamientoBurbuja(array) {
+    // Copiar array para no modificar el original
+    let arr = [...array];
+    let n = arr.length;
+    let pasos = [];
+    
+    // Bucles anidados - control imperativo
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = 0; j < n - i - 1; j++) {
+            // Comparar elementos adyacentes
+            if (arr[j] > arr[j + 1]) {
+                // Intercambiar usando variable temporal
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                
+                // Registrar paso
+                pasos.push(`Intercambio: ${arr[j + 1]} ↔ ${arr[j]}`);
+            }
+        }
+    }
+    
+    return { resultado: arr, pasos: pasos };
+}
+
+// Búsqueda lineal - Enfoque imperativo
+function busquedaLineal(array, objetivo) {
+    let pasos = [];
+    
+    // Iterar elemento por elemento
+    for (let i = 0; i < array.length; i++) {
+        pasos.push(`Paso ${i + 1}: Comparando ${array[i]} con ${objetivo}`);
+        
+        // Condición imperativa
+        if (array[i] === objetivo) {
+            pasos.push(`¡Encontrado en posición ${i}!`);
+            return { encontrado: true, posicion: i, pasos: pasos };
+        }
+    }
+    
+    pasos.push("No encontrado en el array");
+    return { encontrado: false, posicion: -1, pasos: pasos };
+}
+
+// Generador de números aleatorios - Estilo imperativo
+function generarArrayAleatorio(tamaño, min = 1, max = 100) {
+    let array = [];
+    
+    // Bucle imperativo para llenar array
+    for (let i = 0; i < tamaño; i++) {
+        // Generar número aleatorio y agregarlo
+        let numero = Math.floor(Math.random() * (max - min + 1)) + min;
+        array.push(numero);
+    }
+    
+    return array;
+}
+
+// Calculadora de estadísticas - Enfoque imperativo paso a paso
+function calcularEstadisticas(numeros) {
+    // Variables mutables para almacenar estado
+    let suma = 0;
+    let min = numeros[0];
+    let max = numeros[0];
+    let pares = 0;
+    let impares = 0;
+    
+    // Iterar y modificar variables
+    for (let i = 0; i < numeros.length; i++) {
+        let numero = numeros[i];
+        
+        // Acumular suma
+        suma += numero;
+        
+        // Actualizar mínimo y máximo
+        if (numero < min) min = numero;
+        if (numero > max) max = numero;
+        
+        // Contar pares e impares
+        if (numero % 2 === 0) {
+            pares++;
+        } else {
+            impares++;
+        }
+    }
+    
+    // Calcular promedio
+    let promedio = suma / numeros.length;
+    
+    // Retornar objeto con resultados
+    return {
+        suma: suma,
+        promedio: promedio.toFixed(2),
+        min: min,
+        max: max,
+        pares: pares,
+        impares: impares,
+        total: numeros.length
+    };
+}</div>
+                
+                <div class="demo-area">
+                    <h4>🎮 Demo Interactiva - Programación Imperativa:</h4>
+                    <div class="input-group">
+                        <label>Tamaño del Array:</label>
+                        <input type="number" id="arraySize" value="8" min="3" max="15" placeholder="Cantidad de números">
+                    </div>
+                    <div class="input-group">
+                        <label>Número a Buscar:</label>
+                        <input type="number" id="searchNumber" value="50" min="1" max="100" placeholder="Número objetivo">
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="generarArray()">🎲 Generar Array</button>
+                        <button class="btn btn-secondary" onclick="ordenarArray()">📊 Ordenar (Burbuja)</button>
+                        <button class="btn btn-success" onclick="buscarNumero()">🔍 Buscar Número</button>
+                        <button class="btn btn-primary" onclick="mostrarEstadisticas()">📈 Estadísticas</button>
+                    </div>
+                    <div class="result-display" id="imperativeResult">
+Resultados de Programación Imperativa aparecerán aquí...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resumen comparativo -->
+            <div class="feature-highlight">
+                <h4>📊 Resumen Comparativo de Paradigmas:</h4>
+                <div class="grid-demo">
+                    <div>
+                        <h5>🏗️ POO</h5>
+                        <p><strong>Cuándo usar:</strong> Sistemas complejos, modelado del mundo real, reutilización de código</p>
+                        <p><strong>Ejemplo:</strong> Juegos, aplicaciones empresariales, frameworks</p>
+                    </div>
+                    <div>
+                        <h5>🔧 Funcional</h5>
+                        <p><strong>Cuándo usar:</strong> Procesamiento de datos, transformaciones, operaciones matemáticas</p>
+                        <p><strong>Ejemplo:</strong> APIs, análisis de datos, microservicios</p>
+                    </div>
+                    <div>
+                        <h5>📋 Imperativo</h5>
+                        <p><strong>Cuándo usar:</strong> Algoritmos específicos, control detallado, optimización de rendimiento</p>
+                        <p><strong>Ejemplo:</strong> Algoritmos, manipulación directa, scripts de automatización</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========================================
+         JAVASCRIPT - IMPLEMENTACIÓN DE PARADIGMAS
+         ======================================== -->
+    
+    <script>
+        // ========================================
+        // VARIABLES GLOBALES Y INICIALIZACIÓN
+        // ========================================
+        
+        let miAuto = null;
+        let miMoto = null;
+        let arrayActual = [];
+        
+        // Datos para programación funcional
+        const estudiantes = [
+            { nombre: "Ana", edad: 20, notas: [85, 90, 78] },
+            { nombre: "Carlos", edad: 22, notas: [92, 88, 95] },
+            { nombre: "María", edad: 19, notas: [76, 82, 89] },
+            { nombre: "Luis", edad: 21, notas: [88, 85, 91] }
+        ];
+        
+        // ========================================
+        // PROGRAMACIÓN ORIENTADA A OBJETOS
+        // ========================================
+        
+        // Clase base Vehiculo
+        class Vehiculo {
+            constructor(marca, modelo, año) {
+                this.marca = marca;
+                this.modelo = modelo;
+                this.año = año;
+                this.velocidad = 0;
+            }
+            
+            acelerar(incremento = 20) {
+                this.velocidad += incremento;
+                return `${this.marca} ${this.modelo} acelera a ${this.velocidad} km/h`;
+            }
+            
+            obtenerInfo() {
+                return `${this.marca} ${this.modelo} (${this.año})`;
+            }
+        }
+        
+        // Clase Auto (hereda de Vehiculo)
+        class Auto extends Vehiculo {
+            constructor(marca, modelo, año = 2023, puertas = 4) {
+                super(marca, modelo, año);
+                this.puertas = puertas;
+                this.tipo = "Automóvil";
+            }
+            
+            tocarBocina() {
+                return `🚗 ${this.marca} ${this.modelo} toca la bocina: ¡BEEP BEEP!`;
+            }
+            
+            obtenerInfo() {
+                return `${super.obtenerInfo()} - ${this.tipo} de ${this.puertas} puertas`;
+            }
+        }
+        
+        // Clase Motocicleta (hereda de Vehiculo)
+        class Motocicleta extends Vehiculo {
+            constructor(marca, modelo, año = 2023, cilindrada = 600) {
+                super(marca, modelo, año);
+                this.cilindrada = cilindrada;
+                this.tipo = "Motocicleta";
+            }
+            
+            hacerCaballito() {
+                return `🏍️ ${this.marca} ${this.modelo} hace un caballito espectacular!`;
+            }
+            
+            obtenerInfo() {
+                return `${super.obtenerInfo()} - ${this.tipo} ${this.cilindrada}cc`;
+            }
+        }
+        
+        // Funciones para la demo de POO
+        function crearAuto() {
+            const marca = document.getElementById('autoMarca').value || 'Toyota';
+            const modelo = document.getElementById('autoModelo').value || 'Corolla';
+            
+            miAuto = new Auto(marca, modelo);
+            
+            const resultado = `✅ Auto creado exitosamente:\n${miAuto.obtenerInfo()}\nVelocidad actual: ${miAuto.velocidad} km/h`;
+            document.getElementById('oopResult').textContent = resultado;
+        }
+        
+        function crearMoto() {
+            const marca = document.getElementById('motoMarca').value || 'Yamaha';
+            const cilindrada = parseInt(document.getElementById('motoCilindrada').value) || 600;
+            
+            miMoto = new Motocicleta(marca, 'R6', 2023, cilindrada);
+            
+            const resultado = `✅ Motocicleta creada exitosamente:\n${miMoto.obtenerInfo()}\nVelocidad actual: ${miMoto.velocidad} km/h`;
+            document.getElementById('oopResult').textContent = resultado;
+        }
+        
+        function acelerar() {
+            if (!miAuto) {
+                document.getElementById('oopResult').textContent = '❌ Primero debes crear un auto';
+                return;
+            }
+            
+            const mensaje = miAuto.acelerar();
+            document.getElementById('oopResult').textContent = `🚀 ${mensaje}`;
+        }
+        
+        function tocarBocina() {
+            if (!miAuto) {
+                document.getElementById('oopResult').textContent = '❌ Primero debes crear un auto';
+                return;
+            }
+            
+            const mensaje = miAuto.tocarBocina();
+            document.getElementById('oopResult').textContent = mensaje;
+        }
+        
+        function hacerCaballito() {
+            if (!miMoto) {
+                document.getElementById('oopResult').textContent = '❌ Primero debes crear una motocicleta';
+                return;
+            }
+            
+            const mensaje = miMoto.hacerCaballito();
+            document.getElementById('oopResult').textContent = mensaje;
+        }
+        
+        // ========================================
+        // PROGRAMACIÓN FUNCIONAL
+        // ========================================
+        
+        // Funciones puras
+        const calcularPromedio = (notas) => {
+            return notas.reduce((sum, nota) => sum + nota, 0) / notas.length;
+        };
+        
+        const agregarPromedio = (estudiante) => ({
+            ...estudiante,
+            promedio: Math.round(calcularPromedio(estudiante.notas) * 100) / 100
+        });
+        
+        const determinarEstado = (promedio) => {
+            if (promedio >= 90) return "Excelente";
+            if (promedio >= 80) return "Bueno";
+            if (promedio >= 70) return "Regular";
+            return "Necesita mejorar";
+        };
+        
+        const procesarEstudiantes = (estudiantes) => {
+            return estudiantes
+                .map(agregarPromedio)
+                .map(est => ({
+                    ...est,
+                    estado: determinarEstado(est.promedio)
+                }))
+                .sort((a, b) => b.promedio - a.promedio);
+        };
+        
+        // Funciones para la demo funcional
+        function mostrarEstudiantesOriginales() {
+            let resultado = "📚 DATOS ORIGINALES DE ESTUDIANTES:\n\n";
+            estudiantes.forEach(est => {
+                resultado += `👤 ${est.nombre} (${est.edad} años)\n`;
+                resultado += `   Notas: [${est.notas.join(', ')}]\n\n`;
+            });
+            document.getElementById('functionalResult').textContent = resultado;
+        }
+        
+        function procesarDatos() {
+            const procesados = procesarEstudiantes(estudiantes);
+            
+            let resultado = "⚙️ DATOS PROCESADOS (Con Promedios y Estados):\n\n";
+            procesados.forEach((est, index) => {
+                resultado += `${index + 1}. ${est.nombre} (${est.edad} años)\n`;
+                resultado += `   Promedio: ${est.promedio} - Estado: ${est.estado}\n`;
+                resultado += `   Notas: [${est.notas.join(', ')}]\n\n`;
+            });
+            document.getElementById('functionalResult').textContent = resultado;
+        }
+        
+        function filtrarTop() {
+            const procesados = procesarEstudiantes(estudiantes);
+            const excelentes = procesados.filter(est => est.promedio >= 85);
+            
+            let resultado = "🏆 ESTUDIANTES DESTACADOS (Promedio ≥ 85):\n\n";
+            if (excelentes.length === 0) {
+                resultado += "No hay estudiantes con promedio ≥ 85";
+            } else {
+                excelentes.forEach((est, index) => {
+                    resultado += `${index + 1}. ${est.nombre}\n`;
+                    resultado += `   Promedio: ${est.promedio} - ${est.estado}\n\n`;
+                });
+            }
+            document.getElementById('functionalResult').textContent = resultado;
+        }
+        
+        function estadisticas() {
+            const procesados = procesarEstudiantes(estudiantes);
+            const promedios = procesados.map(est => est.promedio);
+            
+            const estadisticas = {
+                total: procesados.length,
+                promedioGeneral: Math.round((promedios.reduce((a, b) => a + b) / promedios.length) * 100) / 100,
+                mejorPromedio: Math.max(...promedios),
+                peorPromedio: Math.min(...promedios),
+                excelentes: procesados.filter(est => est.promedio >= 90).length,
+                buenos: procesados.filter(est => est.promedio >= 80 && est.promedio < 90).length
+            };
+            
+            let resultado = "📊 ESTADÍSTICAS GENERALES:\n\n";
+            resultado += `👥 Total estudiantes: ${estadisticas.total}\n`;
+            resultado += `📈 Promedio general: ${estadisticas.promedioGeneral}\n`;
+            resultado += `🥇 Mejor promedio: ${estadisticas.mejorPromedio}\n`;
+            resultado += `📉 Menor promedio: ${estadisticas.peorPromedio}\n`;
+            resultado += `⭐ Excelentes: ${estadisticas.excelentes}\n`;
+            resultado += `👍 Buenos: ${estadisticas.buenos}\n`;
+            
+            document.getElementById('functionalResult').textContent = resultado;
+        }
+        
+        // ========================================
+        // PROGRAMACIÓN IMPERATIVA
+        // ========================================
+        
+        // Algoritmo de ordenamiento burbuja
+        function ordenamientoBurbuja(array) {
+            let arr = [...array];
+            let n = arr.length;
+            let pasos = [];
+            let comparaciones = 0;
+            let intercambios = 0;
+            
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    comparaciones++;
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        intercambios++;
+                        pasos.push(`Intercambio ${intercambios}: ${arr[j + 1]} ↔ ${arr[j]}`);
+                    }
+                }
+            }
+            
+            return { 
+                resultado: arr, 
+                pasos: pasos, 
+                comparaciones: comparaciones,
+                intercambios: intercambios
+            };
+        }
+        
+        // Búsqueda lineal
+        function busquedaLineal(array, objetivo) {
+            let pasos = [];
+            
+            for (let i = 0; i < array.length; i++) {
+                pasos.push(`Paso ${i + 1}: Comparando ${array[i]} con ${objetivo}`);
+                
+                if (array[i] === objetivo) {
+                    pasos.push(`¡Encontrado en posición ${i}!`);
+                    return { encontrado: true, posicion: i, pasos: pasos };
+                }
+            }
+            
+            pasos.push("No encontrado en el array");
+            return { encontrado: false, posicion: -1, pasos: pasos };
+        }
+        
+        // Generador de array aleatorio
+        function generarArrayAleatorio(tamaño, min = 1, max = 100) {
+            let array = [];
+            
+            for (let i = 0; i < tamaño; i++) {
+                let numero = Math.floor(Math.random() * (max - min + 1)) + min;
+                array.push(numero);
+            }
+            
+            return array;
+        }
+        
+        // Calculadora de estadísticas imperativa
+        function calcularEstadisticasImperativo(numeros) {
+            let suma = 0;
+            let min = numeros[0];
+            let max = numeros[0];
+            let pares = 0;
+            let impares = 0;
+            
+            for (let i = 0; i < numeros.length; i++) {
+                let numero = numeros[i];
+                suma += numero;
+                
+                if (numero < min) min = numero;
+                if (numero > max) max = numero;
+                
+                if (numero % 2 === 0) {
+                    pares++;
+                } else {
+                    impares++;
+                }
+            }
+            
+            let promedio = suma / numeros.length;
+            
+            return {
+                suma: suma,
+                promedio: Math.round(promedio * 100) / 100,
+                min: min,
+                max: max,
+                pares: pares,
+                impares: impares,
+                total: numeros.length
+            };
+        }
+        
+        // Funciones para la demo imperativa
+        function generarArray() {
+            const tamaño = parseInt(document.getElementById('arraySize').value) || 8;
+            arrayActual = generarArrayAleatorio(tamaño, 1, 100);
+            
+            let resultado = `🎲 ARRAY GENERADO:\n\n`;
+            resultado += `Array: [${arrayActual.join(', ')}]\n`;
+            resultado += `Tamaño: ${arrayActual.length} elementos\n`;
+            resultado += `Rango: 1-100\n\n`;
+            resultado += `💡 Usa los otros botones para ordenar, buscar o ver estadísticas`;
+            
+            document.getElementById('imperativeResult').textContent = resultado;
+        }
+        
+        function ordenarArray() {
+            if (arrayActual.length === 0) {
+                document.getElementById('imperativeResult').textContent = '❌ Primero genera un array';
+                return;
+            }
+            
+            const resultadoOrdenamiento = ordenamientoBurbuja(arrayActual);
+            
+            let resultado = `📊 ORDENAMIENTO BURBUJA:\n\n`;
+            resultado += `Array original: [${arrayActual.join(', ')}]\n`;
+            resultado += `Array ordenado: [${resultadoOrdenamiento.resultado.join(', ')}]\n\n`;
+            resultado += `📈 Estadísticas:\n`;
+            resultado += `- Comparaciones: ${resultadoOrdenamiento.comparaciones}\n`;
+            resultado += `- Intercambios: ${resultadoOrdenamiento.intercambios}\n\n`;
+            resultado += `🔄 Pasos del algoritmo:\n`;
+            if (resultadoOrdenamiento.pasos.length > 0) {
+                resultado += resultadoOrdenamiento.pasos.slice(0, 10).join('\n');
+                if (resultadoOrdenamiento.pasos.length > 10) {
+                    resultado += `\n... y ${resultadoOrdenamiento.pasos.length - 10} pasos más`;
+                }
+            } else {
+                resultado += 'Array ya estaba ordenado';
+            }
+            
+            document.getElementById('imperativeResult').textContent = resultado;
+        }
+        
+        function buscarNumero() {
+            if (arrayActual.length === 0) {
+                document.getElementById('imperativeResult').textContent = '❌ Primero genera un array';
+                return;
+            }
+            
+            const objetivo = parseInt(document.getElementById('searchNumber').value) || 50;
+            const resultadoBusqueda = busquedaLineal(arrayActual, objetivo);
+            
+            let resultado = `🔍 BÚSQUEDA LINEAL:\n\n`;
+            resultado += `Array: [${arrayActual.join(', ')}]\n`;
+            resultado += `Objetivo: ${objetivo}\n\n`;
+            
+            if (resultadoBusqueda.encontrado) {
+                resultado += `✅ ¡ENCONTRADO!\n`;
+                resultado += `Posición: ${resultadoBusqueda.posicion}\n`;
+                resultado += `Valor: ${arrayActual[resultadoBusqueda.posicion]}\n\n`;
+            } else {
+                resultado += `❌ NO ENCONTRADO\n\n`;
+            }
+            
+            resultado += `🔄 Proceso de búsqueda:\n`;
+            resultado += resultadoBusqueda.pasos.join('\n');
+            
+            document.getElementById('imperativeResult').textContent = resultado;
+        }
+        
+        function mostrarEstadisticas() {
+            if (arrayActual.length === 0) {
+                document.getElementById('imperativeResult').textContent = '❌ Primero genera un array';
+                return;
+            }
+            
+            const stats = calcularEstadisticasImperativo(arrayActual);
+            
+            let resultado = `📈 ESTADÍSTICAS DEL ARRAY:\n\n`;
+            resultado += `Array: [${arrayActual.join(', ')}]\n\n`;
+            resultado += `📊 Datos calculados:\n`;
+            resultado += `- Total elementos: ${stats.total}\n`;
+            resultado += `- Suma: ${stats.suma}\n`;
+            resultado += `- Promedio: ${stats.promedio}\n`;
+            resultado += `- Mínimo: ${stats.min}\n`;
+            resultado += `- Máximo: ${stats.max}\n`;
+            resultado += `- Números pares: ${stats.pares}\n`;
+            resultado += `- Números impares: ${stats.impares}\n`;
+            
+            document.getElementById('imperativeResult').textContent = resultado;
+        }
+        
+        // ========================================
+        // INICIALIZACIÓN
+        // ========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧩 Paradigmas de JavaScript - Demo cargada');
+            
+            // Generar array inicial
+            arrayActual = generarArrayAleatorio(6, 1, 50);
+            
+            // Mostrar mensaje de bienvenida
+            setTimeout(() => {
+                console.log('💡 Explora los diferentes paradigmas de programación en JavaScript');
+                console.log('🎮 Usa las demos interactivas para ver cada paradigma en acción');
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>
