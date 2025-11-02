@@ -1,0 +1,27 @@
+graph TD
+    %% Elemento 1: Envío Premium
+    %% Generado automáticamente - Patrón Composite
+
+    %% Definición de nodos
+    nodo0("📁 Envío Premium<br/>$1690.97<br/>(3 elementos)"):::caja
+    nodo1("📁 Caja Periféricos<br/>$120.98<br/>(2 elementos)"):::caja
+    nodo2["📦 Mouse Inalámbrico<br/>$25.99"]:::producto
+    nodo3["📦 Teclado Mecánico<br/>$89.99"]:::producto
+    nodo4("📁 Caja Electrónicos<br/>$1514.99<br/>(2 elementos)"):::caja
+    nodo5["📦 Laptop Gaming<br/>$1200.00"]:::producto
+    nodo6["📦 Monitor 24'<br/>$299.99"]:::producto
+    nodo7["📦 Libro TypeScript<br/>$45.00"]:::producto
+
+    %% Conexiones
+    nodo0 --> nodo1
+    nodo1 --> nodo2
+    nodo1 --> nodo3
+    nodo0 --> nodo4
+    nodo4 --> nodo5
+    nodo4 --> nodo6
+    nodo0 --> nodo7
+
+    %% Estilos CSS
+    classDef producto fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef caja fill:#f3e5f5,stroke:#4a148c,stroke-width:3px,color:#000
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px

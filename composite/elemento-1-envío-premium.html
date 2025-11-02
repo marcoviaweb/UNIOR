@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrón Composite: Sistema de Pedidos - Visualización Interactiva</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .info {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #2196f3;
+        }
+        .problem-section {
+            background: linear-gradient(135deg, #fff3e0, #ffcc02);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #f57c00;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .legend-producto {
+            background: #e1f5fe;
+            border: 3px solid #01579b;
+            color: #01579b;
+        }
+        .legend-caja {
+            background: #f3e5f5;
+            border: 3px solid #4a148c;
+            color: #4a148c;
+        }
+        .benefits {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f1f8e9, #c8e6c9);
+            border-radius: 10px;
+        }
+        .benefits h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        .benefits ul {
+            list-style: none;
+            padding: 0;
+        }
+        .benefits li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .benefits li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+        }
+        .calculation-demo {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Patrón Composite: Sistema de Pedidos</h1>
+        
+        <div class="info">
+            <h3 style="margin-top: 0; color: #1976d2;">🧩 El Problema Resuelto</h3>
+            <p><strong>Escenario:</strong> Imagina que tienes dos tipos de objetos: <strong>Productos</strong> y <strong>Cajas</strong>. 
+            Una Caja puede contener varios Productos así como cierto número de Cajas más pequeñas. 
+            Estas Cajas pequeñas también pueden contener algunos Productos o incluso Cajas más pequeñas, y así sucesivamente.</p>
+            
+            <p><strong>El Desafío:</strong> Crear un sistema de pedidos que utilice estas clases. Los pedidos pueden contener:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>✅ Productos sencillos sin envolver</li>
+                <li>✅ Cajas llenas de productos</li>
+                <li>✅ Cajas que contienen otras cajas (anidamiento infinito)</li>
+            </ul>
+            
+            <p><strong>🎯 La Pregunta Clave:</strong> <em>¿Cómo determinar el precio total de ese pedido?</em></p>
+            
+            <p><strong>💡 La Solución - Patrón Composite:</strong> Tratar productos individuales y cajas de manera uniforme, 
+            permitiendo que el cálculo de precios fluya naturalmente por toda la estructura jerárquica.</p>
+        </div>
+
+        <div class="problem-section">
+            <strong>📊 En el diagrama siguiente:</strong> Observa cómo cada elemento (producto o caja) contribuye al precio total 
+            de manera recursiva, demostrando la elegancia del patrón Composite en acción.
+        </div>
+
+        <div class="legend">
+            <div class="legend-item legend-producto">
+                <span style="font-size: 1.2em;">📦</span>
+                <span>Producto (Leaf)</span>
+            </div>
+            <div class="legend-item legend-caja">
+                <span style="font-size: 1.2em;">📁</span>
+                <span>Caja (Composite)</span>
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <div class="mermaid">
+graph TD
+    %% Elemento 1: Envío Premium
+    %% Generado automáticamente - Patrón Composite
+
+    %% Definición de nodos
+    nodo0("📁 Envío Premium<br/>$1690.97<br/>(3 elementos)"):::caja
+    nodo1("📁 Caja Periféricos<br/>$120.98<br/>(2 elementos)"):::caja
+    nodo2["📦 Mouse Inalámbrico<br/>$25.99"]:::producto
+    nodo3["📦 Teclado Mecánico<br/>$89.99"]:::producto
+    nodo4("📁 Caja Electrónicos<br/>$1514.99<br/>(2 elementos)"):::caja
+    nodo5["📦 Laptop Gaming<br/>$1200.00"]:::producto
+    nodo6["📦 Monitor 24'<br/>$299.99"]:::producto
+    nodo7["📦 Libro TypeScript<br/>$45.00"]:::producto
+
+    %% Conexiones
+    nodo0 --> nodo1
+    nodo1 --> nodo2
+    nodo1 --> nodo3
+    nodo0 --> nodo4
+    nodo4 --> nodo5
+    nodo4 --> nodo6
+    nodo0 --> nodo7
+
+    %% Estilos CSS
+    classDef producto fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef caja fill:#f3e5f5,stroke:#4a148c,stroke-width:3px,color:#000
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px
+            </div>
+        </div>
+
+        <div class="calculation-demo">
+            <h3 style="margin-top: 0; color: #c2185b;">🧮 Cálculo Recursivo en Acción</h3>
+            <p><strong>Fórmula del Patrón Composite:</strong></p>
+            <ul style="margin: 10px 0; padding-left: 20px; font-family: monospace;">
+                <li><strong>Producto:</strong> precio = valor_base</li>
+                <li><strong>Caja:</strong> precio = costo_caja + suma(precios_contenido)</li>
+            </ul>
+            <p>Esta recursión permite calcular automáticamente el precio total sin importar la complejidad de la estructura.</p>
+        </div>
+
+        <div class="benefits">
+            <h3>💡 Beneficios del Patrón Composite Visualizados:</h3>
+            <ul>
+                <li><strong>Uniformidad:</strong> Productos y cajas se representan con la misma interfaz</li>
+                <li><strong>Recursión:</strong> El cálculo de precios fluye naturalmente por el árbol</li>
+                <li><strong>Flexibilidad:</strong> Fácil agregar nuevos tipos sin romper la estructura</li>
+                <li><strong>Transparencia:</strong> El cliente no distingue entre hojas y composites</li>
+                <li><strong>Escalabilidad:</strong> Anidamiento ilimitado de cajas dentro de cajas</li>
+            </ul>
+        </div>
+
+        <div class="info">
+            <strong>🔍 Cómo interpretar el diagrama:</strong><br>
+            • Las flechas indican relaciones "contiene"<br>
+            • Los precios mostrados incluyen el cálculo recursivo completo<br>
+            • La estructura del árbol refleja la jerarquía real del pedido<br>
+            • Cada nodo puede expandirse o contraerse conceptualmente<br><br>
+            
+            <strong>🎓 Para estudiantes:</strong> Este es un ejemplo perfecto de cómo los patrones de diseño 
+            resuelven problemas complejos de manera elegante y escalable.
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>
